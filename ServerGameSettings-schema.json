@@ -1,0 +1,1225 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "V Rising Server Settings",
+  "description": "Schema for both ServerHostSettings.json and ServerGameSettings.json",
+  "oneOf": [
+    {
+      "title": "Server Host Settings",
+      "type": "object",
+      "required": ["Name", "Port", "QueryPort", "SaveName", "MaxConnectedUsers"],
+      "not": {
+        "required": ["GameModeType", "CastleDamageMode"]
+      },
+      "additionalProperties": true,
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "description": "Schema reference path"
+        },
+        "Name": {
+          "type": "string",
+          "markdownDescription": "Name of the server that shows up in server list\n\n**Default**: `\"V Rising Server\"`\n\n**Example**: `\"My V Rising Server\"`\n\n**Environment Variables**: `VR_NAME`, `VR_SERVER_NAME`\n\n**Command Line**: `-serverName`",
+          "default": "V Rising Server"
+        },
+        "Description": {
+          "type": "string",
+          "markdownDescription": "Short server description shown in details panel of server list when entry is selected. Also printed in chat when connecting to server\n\n**Default**: `\"\"`\n\n**Example**: `\"Role playing server. Reset every Monday. Be nice.\"`\n\n**Environment Variables**: `VR_DESCRIPTION`\n\n**Command Line**: `-description`",
+          "default": ""
+        },
+        "Port": {
+          "type": "integer",
+          "minimum": 1024,
+          "maximum": 65535,
+          "markdownDescription": "UDP port for game traffic\n\n**Default**: `9876`\n\n**Example**: `27015`\n\n**Environment Variables**: `VR_GAME_PORT`\n\n**Command Line**: `-gamePort`",
+          "default": 9876
+        },
+        "QueryPort": {
+          "type": "integer",
+          "minimum": 1024,
+          "maximum": 65535,
+          "markdownDescription": "UDP port for Steam server list features\n\n**Default**: `9877`\n\n**Example**: `27016`\n\n**Environment Variables**: `VR_QUERY_PORT`\n\n**Command Line**: `-queryPort`",
+          "default": 9877
+        },
+        "MaxConnectedUsers": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128,
+          "markdownDescription": "Max number of concurrent players on server. Maximum technically supported is 128\n\n**Default**: `40`\n\n**Environment Variables**: `VR_MAX_USERS`\n\n**Command Line**: `-maxUsers`",
+          "default": 40
+        },
+        "MaxConnectedAdmins": {
+          "type": "integer",
+          "minimum": 1,
+          "markdownDescription": "Max number of admins to allow connect even when server is full\n\n**Default**: `4`\n\n**Environment Variables**: `VR_MAX_ADMINS`\n\n**Command Line**: `-maxAdmins`",
+          "default": 4
+        },
+        "ServerFps": {
+          "type": "integer",
+          "minimum": 1,
+          "markdownDescription": "Target FPS for server\n\n**Default**: `30`\n\n**Environment Variables**: `VR_FPS`, `VR_TARGET_FPS`\n\n**Command Line**: `-fps`, `-targetFps`, `-serverFps`",
+          "default": 30
+        },
+        "SaveName": {
+          "type": "string",
+          "markdownDescription": "Name of save file/directory. Must be a valid directory name\n\n**Default**: `\"world1\"`\n\n**Example**: `\"world23\"`\n\n**Environment Variables**: `VR_SAVE_NAME`\n\n**Command Line**: `-saveName`",
+          "default": "world1"
+        },
+        "Password": {
+          "type": "string",
+          "markdownDescription": "Server password. Leave empty for no password\n\n**Default**: `\"\"`\n\n**Environment Variables**: `VR_PASSWORD`\n\n**Command Line**: `-password`",
+          "default": ""
+        },
+        "Secure": {
+          "type": "boolean",
+          "markdownDescription": "Enable VAC protection on server. VAC banned clients will not be able to connect\n\n**Default**: `true`\n\n**Environment Variables**: `VR_SECURE`\n\n**Command Line**: `-secure`, `-enableSecure`, `-disableSecure`",
+          "default": true
+        },
+        "ListOnSteam": {
+          "type": "boolean",
+          "markdownDescription": "Register on Steam list server\n\n**Default**: `false`\n\n**Environment Variables**: `VR_LIST_ON_STEAM`\n\n**Command Line**: `-listOnSteam`",
+          "default": false
+        },
+        "ListOnEOS": {
+          "type": "boolean",
+          "markdownDescription": "Register on EOS list server\n\n**Default**: `false`\n\n**Environment Variables**: `VR_LIST_ON_EOS`\n\n**Command Line**: `-listOnEOS`",
+          "default": false
+        },
+        "AutoSaveCount": {
+          "type": "integer",
+          "minimum": 1,
+          "markdownDescription": "Total number of Auto Saves to keep\n\n**Default**: `20`\n\n**Environment Variables**: `VR_SAVE_COUNT`\n\n**Command Line**: `-saveCount`",
+          "default": 20
+        },
+        "HideIPAddress": {
+          "type": "boolean",
+          "markdownDescription": "When listing server on EOS server list, the IP address will not be shown/advertised. Players will connect via relay servers\n\n**Example**: `false`\n\n**Environment Variables**: `VR_HIDEIPADDRESS`, `VR_HIDE_IP_ADDRESS`\n\n**Command Line**: `-hideIpAddress`"
+        },
+        "LowerFPSWhenEmpty": {
+          "type": "boolean",
+          "markdownDescription": "Run the server at a lower framerate target when no players are logged in\n\n**Example**: `true`\n\n**Environment Variables**: `VR_LOWER_FPS_WHEN_EMPTY`\n\n**Command Line**: `-lowerFPSWhenEmpty`"
+        },
+        "LowerFPSWhenEmptyValue": {
+          "type": "integer",
+          "minimum": 1,
+          "markdownDescription": "Set the framerate target for when LowerFPSWhenEmpty is active\n\n**Example**: `15`, `10`, `5`\n\n**Environment Variables**: `VR_LOWER_FPS_WHEN_EMPTY_VALUE`\n\n**Command Line**: `-lowerFPSWhenEmptyValue`"
+        },
+        "LanMode": {
+          "type": "boolean",
+          "markdownDescription": "Enable LAN mode\n\n**Example**: `false`\n\n**Environment Variables**: `VR_LAN_MODE`\n\n**Command Line**: `-lanMode`, `-lan`, `-enableLanMode`, `-disableLanMode`"
+        },
+        "AutoSaveInterval": {
+          "type": "integer",
+          "minimum": 1,
+          "markdownDescription": "Interval in seconds between each auto save\n\n**Default**: `120`\n\n**Environment Variables**: `VR_SAVE_INTERVAL`\n\n**Command Line**: `-saveInterval`",
+          "default": 120
+        },
+        "CompressSaveFiles": {
+          "type": "boolean",
+          "markdownDescription": "Whether save files should be compressed\n\n**Default**: `true`",
+          "default": true
+        },
+        "GameSettingsPreset": {
+          "type": "string",
+          "markdownDescription": "Load a ServerGameSettings preset from VRisingServer_Data/StreamingAssets/GameSettingPresets folder\n\n**Default**: `\"\"`\n\n**Example**: `\"StandardPvP\"`\n\n**Environment Variables**: `VR_PRESET`\n\n**Command Line**: `-preset`",
+          "default": ""
+        },
+        "GameDifficultyPreset": {
+          "type": "string",
+          "markdownDescription": "Load a GameDifficulty preset from VRisingServer_Data/StreamingAssets/GameDifficultyPresets folder\n\n**Default**: `\"\"`\n\n**Example**: `\"Difficulty_Normal\"`\n\n**Environment Variables**: `VR_DIFFICULTY_PRESET`\n\n**Command Line**: `-difficultyPreset`",
+          "default": ""
+        },
+        "AdminOnlyDebugEvents": {
+          "type": "boolean",
+          "markdownDescription": "Whether debug events are restricted to admins only\n\n**Default**: `true`",
+          "default": true
+        },
+        "DisableDebugEvents": {
+          "type": "boolean",
+          "markdownDescription": "Whether to disable debug events entirely\n\n**Default**: `false`",
+          "default": false
+        },
+        "API": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "boolean",
+              "markdownDescription": "Whether to enable the server API\n\n**Default**: `false`",
+              "default": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "Rcon": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "boolean",
+              "markdownDescription": "Enable or disable Rcon functionality\n\n**Default**: `false`\n\n**Environment Variables**: `VR_RCON_ENABLED`\n\n**Command Line**: `-rconEnabled`, `-enableRcon`, `-disableRcon`",
+              "default": false
+            },
+            "Port": {
+              "type": "integer",
+              "minimum": 1024,
+              "maximum": 65535,
+              "markdownDescription": "Rcon TCP port\n\n**Default**: `25575`\n\n**Environment Variables**: `VR_RCON_PORT`\n\n**Command Line**: `-rconPort`",
+              "default": 25575
+            },
+            "Password": {
+              "type": "string",
+              "markdownDescription": "Password to access RCON\n\n**Default**: `\"\"`\n\n**Environment Variables**: `VR_RCON_PASSWORD`\n\n**Command Line**: `-rconPassword`",
+              "default": ""
+            }
+          },
+            "BindAddress": {
+              "type": "string",
+              "markdownDescription": "Binds RCON socket to specified address. Will override the global Address setting\n\n**Example**: `\"10.22.0.8\"`\n\n**Environment Variables**: `VR_RCON_BIND_ADDRESS`\n\n**Command Line**: `-rconBindAddress`"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+  {
+    "title": "Server Game Settings",
+    "type": "object",
+    "required": ["GameModeType", "CastleDamageMode"],
+    "not": {
+      "required": ["Port", "QueryPort"]
+    },
+    "additionalProperties": true,
+    "properties": {
+      "$schema": {
+        "type": "string",
+        "description": "Schema reference path"
+      },
+      "GameDifficulty": {
+        "type": "string",
+        "enum": [
+          "Easy",
+          "Normal",
+          "Brutal"
+        ],
+        "markdownDescription": "Sets the primary game difficulty (it's best not to change this from default as other server settings changed in this file will not be applied",
+        "default": "Normal"
+      },
+      "GameModeType": {
+        "type": "string",
+        "enum": [
+          "PvE",
+          "PvP"
+        ],
+        "markdownDescription": "Sets the primary game mode type:\n\n- `PvE`: Player versus Environment - Defines basics for PvE Gamemode\n- `PvP`: Player versus Player - Defines basics for PvP Gamemode\n\n**Default**: `PvP`",
+        "default": "PvP"
+      },
+      "CastleDamageMode": {
+        "type": "string",
+        "enum": [
+          "Never",
+          "Always",
+          "TimeRestricted"
+        ],
+        "markdownDescription": "Controls when castles can be damaged:\n\n- `Never`: Players may never deal damage to enemy castle structures\n- `Always`: Players may always deal damage to enemy castle structures\n- `TimeRestricted`: Players may only damage enemy castle structures during certain real-time frames\n\n**Default**: `Always`",
+        "default": "Always"
+      },
+      "SiegeWeaponHealth": {
+        "type": "string",
+        "enum": [
+          "VeryLow",
+          "Low",
+          "Normal",
+          "High",
+          "VeryHigh"
+        ],
+        "markdownDescription": "Changes siege golem health:\n\n- `VeryLow`: 500 HP\n- `Low`: 1000 HP\n- `Normal`: 1500 HP\n- `High`: 2000 HP\n- `VeryHigh`: 2500 HP\n\n**Default**: `Normal`",
+        "default": "Normal"
+      },
+      "PlayerDamageMode": {
+        "type": "string",
+        "enum": [
+          "Always",
+          "TimeRestricted"
+        ],
+        "markdownDescription": "Controls when players can damage each other (Disabled in PvE):\n\n- `Always`: Players can always deal damage to other players\n- `TimeRestricted`: Players may only damage other players during certain real-time frames\n\n**Default**: `Always`",
+        "default": "Always"
+      },
+      "CastleHeartDamageMode": {
+        "type": "string",
+        "enum": [
+          "CanBeDestroyedOnlyWhenDecaying",
+          "CanBeDestroyedByPlayers",
+          "CanBeSeizedOrDestroyedByPlayers"
+        ],
+        "markdownDescription": "How Castle Hearts can be captured/destroyed:\n\n- `CanBeDestroyedOnlyWhenDecaying`: Players may only destroy hearts when in Decay\n- `CanBeDestroyedByPlayers`: Players may destroy hearts using 'key' items\n- `CanBeSeizedOrDestroyedByPlayers`: Players may destroy and seize control using 'key' items\n\n**Default**: `CanBeDestroyedByPlayers`",
+        "default": "CanBeDestroyedByPlayers"
+      },
+      "PvPProtectionMode": {
+        "type": "string",
+        "enum": [
+          "Disabled",
+          "VeryShort",
+          "Short",
+          "Medium",
+          "Long"
+        ],
+        "markdownDescription": "Protection time for new players in PvP:\n\n- `Disabled`: 0 seconds (no protection)\n- `VeryShort`: 900 seconds (15 minutes)\n- `Short`: 1800 seconds (30 minutes)\n- `Medium`: 3600 seconds (1 hour)\n- `Long`: 7200 seconds (2 hours)\n\n**Default**: `Medium`",
+        "default": "Medium"
+      },
+      "DeathContainerPermission": {
+        "type": "string",
+        "enum": [
+          "Anyone",
+          "ClanMembers",
+          "OnlySelf"
+        ],
+        "markdownDescription": "Controls who can loot your dropped items after death:\n\n- `Anyone`: Everyone can loot the body\n- `ClanMembers`: Only self and Clan members may loot the body\n- `OnlySelf`: Only self may loot the body\n\n**Default**: `Anyone`",
+        "default": "Anyone"
+      },
+      "RelicSpawnType": {
+        "type": "string",
+        "enum": [
+          "Unique",
+          "Plentiful"
+        ],
+        "markdownDescription": "Controls soul shard drops from end game bosses:\n\n- `Unique`: Soul shards are unique - only one of each type may exist at a time\n- `Plentiful`: Soul shards are plentiful - a new one drops each time a boss is slain\n\n**Default**: `Unique`",
+        "default": "Unique"
+      },
+      "CanLootEnemyContainers": {
+        "type": "boolean",
+        "markdownDescription": "Whether players can loot containers belonging to other players not in their clan\n\n**Default**: `true`\n\n**Range**: `true` or `false`",
+        "default": true
+      },
+      "BloodBoundEquipment": {
+        "type": "boolean",
+        "markdownDescription": "When enabled, most equipment will not be dropped upon death\n\n**Default**: `true`\n\n**Range**: `true` or `false`",
+        "default": true
+      },
+      "TeleportBoundItems": {
+        "type": "boolean",
+        "markdownDescription": "When enabled, some items will prevent you from using waygates\n\n**Default**: `true`\n\n**Range**: `true` or `false`",
+        "default": true
+      },
+      "BatBoundItems": {
+        "type": "boolean",
+        "markdownDescription": "Whether items will prevent using bat form\n\n**Default**: `false`\n\n**Range**: `true` or `false`",
+        "default": false
+      },
+      "AllowGlobalChat": {
+        "type": "boolean",
+        "markdownDescription": "Allow players to write messages that all players on the server can read\n\n**Default**: `true`\n\n**Range**: `true` or `false`",
+        "default": true
+      },
+      "AllWaypointsUnlocked": {
+        "type": "boolean",
+        "markdownDescription": "⚠️ **WARNING: DO NOT CHANGE** - can harm server!\nWhether all Vampire Waygates start unlocked\n\n**Default**: `false`\n\n**Range**: `true` or `false`",
+        "default": false
+      },
+      "FreeCastleRaid": {
+        "type": "boolean",
+        "markdownDescription": "Whether raiding an enemy player castle heart requires materials\n\n**Default**: `false`\n\n**Range**: `true` or `false`",
+        "default": false
+      },
+      "FreeCastleClaim": {
+        "type": "boolean",
+        "markdownDescription": "Whether claiming castles requires resources\n\n**Default**: `false`\n\n**Range**: `true` or `false`",
+        "default": false
+      },
+      "FreeCastleDestroy": {
+        "type": "boolean",
+        "markdownDescription": "Whether destroying castles requires resources\n\n**Default**: `false`\n\n**Range**: `true` or `false`",
+        "default": false
+      },
+      "InactivityKillEnabled": {
+        "type": "boolean",
+        "markdownDescription": "Whether inactive players will be killed after a certain amount of time\n\n**Default**: `true`\n\n**Range**: `true` or `false`",
+        "default": true
+      },
+      "DisableDisconnectedDeadEnabled": {
+        "type": "boolean",
+        "markdownDescription": "Whether dead characters persist in the world if the player is disconnected\n\n**Default**: `true`\n\n**Range**: `true` or `false`",
+        "default": true
+      },
+      "AnnounceSiegeWeaponSpawn": {
+        "type": "boolean",
+        "markdownDescription": "Shows a system message in the chat when a Siege Golem is being summoned\n\n**Default**: `true`\n\n**Range**: `true` or `false`",
+        "default": true
+      },
+      "ShowSiegeWeaponMapIcon": {
+        "type": "boolean",
+        "markdownDescription": "Show Siege Golems on the big map\n\n**Default**: `false`\n\n**Range**: `true` or `false`",
+        "default": false
+      },
+      "CastleRelocationEnabled": {
+        "type": "boolean",
+        "markdownDescription": "Enables or disables castle relocation\n\n**Default**: `true`\n\n**Range**: `true` or `false`",
+        "default": true
+      },
+      "InactivityKillTimeMin": {
+        "type": "integer",
+        "minimum": 0,
+        "markdownDescription": "Minimum timer before inactive player is killed in seconds based on gear level\n\n**Default**: `3600` (1 hour)\n\n**Minimum**: `0`",
+        "default": 3600
+      },
+      "InactivityKillTimeMax": {
+        "type": "integer",
+        "minimum": 60,
+        "maximum": 604800,
+        "markdownDescription": "Maximum timer before inactive player is killed in seconds based on gear level\n\n**Default**: `604800` (7 days)\n\n**Range**: `60`-`604800`",
+        "default": 604800
+      },
+      "InactivityKillSafeTimeAddition": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 604800,
+        "markdownDescription": "Additional time before an inactive player is killed when in a castle territory\n\n**Default**: `172800` (2 days)\n\n**Range**: `0`-`604800`",
+        "default": 172800
+      },
+      "InactivityKillTimerMaxItemLevel": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 100,
+        "markdownDescription": "The maximum gear level that the inactivity min and max timers are based on\n\n**Default**: `84`\n\n**Range**: `1`-`100`",
+        "default": 84
+      },
+      "DisableDisconnectedDeadTimer": {
+        "type": "integer",
+        "minimum": 0,
+        "markdownDescription": "The time for a disconnected dead player to become disabled in seconds\n\n**Default**: `60`\n\n**Minimum**: `0`",
+        "default": 60
+      },
+      "DisconnectedSunImmunityTime": {
+        "type": "number",
+        "minimum": 0,
+        "markdownDescription": "Time in seconds a disconnected player has immunity from sun damage (undocumented)\n\n**Default**: `300.0` (5 minutes)\n\n**Minimum**: `0`",
+        "default": 300.0
+      },
+      "CastleSiegeTimer": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 1800,
+        "markdownDescription": "Duration in seconds that a castle siege can last\n\n**Default**: `420.0` (7 minutes)\n\n**Range**: `1`-`1800`",
+        "default": 420.0
+      },
+      "CastleUnderAttackTimer": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 180,
+        "markdownDescription": "Duration in seconds for enemy players that deal damage to heart, use explosives or siege golems\n\n**Default**: `60.0`\n\n**Range**: `1`-`180`",
+        "default": 60.0
+      },
+      "CastleRaidTimer": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 3600,
+        "markdownDescription": "Duration of a castle raid in seconds\n\n**Default**: `600.0` (10 minutes)\n\n**Range**: `0`-`3600`",
+        "default": 600.0
+      },
+      "CastleRaidProtectionTime": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 86400,
+        "markdownDescription": "Cooldown between castle raids in seconds\n\n**Default**: `1800.0` (30 minutes)\n\n**Range**: `0`-`86400`",
+        "default": 1800.0
+      },
+      "CastleExposedFreeClaimTimer": {
+        "type": "number",
+        "markdownDescription": "Duration in seconds a castle is exposed for claiming\n\n**Default**: `300.0` (5 minutes)",
+        "default": 300.0
+      },
+      "CastleRelocationCooldown": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 172800,
+        "markdownDescription": "Cooldown time in seconds for castle relocation\n\n**Default**: `10800.0` (3 hours)\n\n**Range**: `0`-`172800`",
+        "default": 10800.0
+      },
+      "StartingProgressionLevel": {
+        "type": "integer",
+        "minimum": 0,
+        "markdownDescription": "All quests below this number will be unlocked for players\n\n**Default**: `0`\n\n**Minimum**: `0`",
+        "default": 0
+      },
+      "StarterEquipmentId": {
+        "type": "integer",
+        "markdownDescription": "ID for starting equipment set:\n- `0`: None\n- `-376135143`: Copper Equipment (Lvl 30)\n- `-1613823352`: Iron Equipment (Lvl 50)\n- `-255898606`: Darksilver Equipment (Lvl 70)\n- `1177675846`: Sanguine Equipment (Lvl 80)\n\n**Default**: `0`",
+        "default": 0
+      },
+      "StarterResourcesId": {
+        "type": "integer",
+        "markdownDescription": "ID for starting resources:\n- `0`: None\n- `-696202180`: Copper Material (Lvl 30)\n- `481718792`: Iron Material (Lvl 50)\n- `-766909665`: Darksilver Material (Lvl 70)\n\n**Default**: `0`",
+        "default": 0
+      },
+      "InventoryStacksModifier": {
+        "type": "number",
+        "minimum": 0.25,
+        "maximum": 5.0,
+        "markdownDescription": "Multiplies the amount of items that can be combined into a single stack\n\n**Default**: `1.0`\n\n**Range**: `0.25`-`5.0`",
+        "default": 1.0
+      },
+      "DropTableModifier_General": {
+        "type": "number",
+        "minimum": 0.25,
+        "maximum": 5.0,
+        "markdownDescription": "Multiplies all droptables with this factor granting more or less drops from kills and chests\n\n**Default**: `1.0`\n\n**Range**: `0.25`-`5.0`",
+        "default": 1.0
+      },
+      "DropTableModifier_Missions": {
+        "type": "number",
+        "minimum": 0.25,
+        "maximum": 5.0,
+        "markdownDescription": "Multiplies the amount of loot received from successful servant hunts\n\n**Default**: `1.0`\n\n**Range**: `0.25`-`5.0`",
+        "default": 1.0
+      },
+      "MaterialYieldModifier_Global": {
+        "type": "number",
+        "minimum": 0.25,
+        "maximum": 5.0,
+        "markdownDescription": "Multiplies the amount of materials received from harvesting resource nodes\n\n**Default**: `1.0`\n\n**Range**: `0.25`-`5.0`",
+        "default": 1.0
+      },
+      "BloodEssenceYieldModifier": {
+        "type": "number",
+        "minimum": 0.25,
+        "maximum": 5.0,
+        "markdownDescription": "Multiplies the amount of blood essence received from defeating enemies\n\n**Default**: `1.0`\n\n**Range**: `0.25`-`5.0`",
+        "default": 1.0
+      },
+      "JournalVBloodSourceUnitMaxDistance": {
+        "type": "number",
+        "markdownDescription": "Currently not used\n\n**Default**: `25.0`",
+        "default": 25.0
+      },
+      "PvPVampireRespawnModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 5,
+        "markdownDescription": "Multiplies the additional respawn duration players suffer from being slain in PvP\n\n**Default**: `1.0`\n\n**Range**: `0`-`5`",
+        "default": 1.0
+      },
+      "BuildCostModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10,
+        "markdownDescription": "Multiplies the amount of materials required to build structures\n\n**Default**: `1.0`\n\n**Range**: `0`-`10`",
+        "default": 1.0
+      },
+      "RecipeCostModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10,
+        "markdownDescription": "Multiplies the cost of crafting items\n\n**Default**: `1.0`\n\n**Range**: `0`-`10`",
+        "default": 1.0
+      },
+      "CraftRateModifier": {
+        "type": "number",
+        "minimum": 0.1,
+        "maximum": 10,
+        "markdownDescription": "The rate for crafting items and equipment in crafting stations (not refinement stations). Higher rate results in more rapid crafting\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`10`",
+        "default": 1.0
+      },
+      "ResearchCostModifier": {
+        "type": "number",
+        "minimum": 0.1,
+        "maximum": 10,
+        "markdownDescription": "Multiplies research costs\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`10`",
+        "default": 1.0
+      },
+      "RefinementCostModifier": {
+        "type": "number",
+        "minimum": 0.1,
+        "maximum": 10,
+        "markdownDescription": "Multiplies the cost of refining items\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`10`",
+        "default": 1.0
+      },
+      "RefinementRateModifier": {
+        "type": "number",
+        "minimum": 0.1,
+        "maximum": 10,
+        "markdownDescription": "Rate for how quickly materials are refined. A higher rate results in more rapid refinement\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`10`",
+        "default": 1.0
+      },
+      "ResearchTimeModifier": {
+        "type": "number",
+        "minimum": 0.1,
+        "maximum": 10,
+        "markdownDescription": "Multiplies research time\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`10`",
+        "default": 1.0
+      },
+      "DismantleResourceModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1,
+        "markdownDescription": "The material reimbursement players receive from dismantling a structure\n\n**Default**: `0.75`\n\n**Range**: `0`-`1`",
+        "default": 0.75
+      },
+      "ServantConvertRateModifier": {
+        "type": "number",
+        "minimum": 0.1,
+        "maximum": 20,
+        "markdownDescription": "Rate for how quickly humans turn into servants. A higher rate results in more rapid conversion\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`20`",
+        "default": 1.0
+      },
+      "RepairCostModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10,
+        "markdownDescription": "Multiplies repair costs for buildings\n\n**Default**: `1.0`\n\n**Range**: `0`-`10`",
+        "default": 1.0
+      },
+      "Death_DurabilityFactorLoss": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1,
+        "markdownDescription": "The amount of durability loss that equipment suffers upon death when defeated in PvP. Players are deemed as in PvP for a duration after dealing damage to or receiving damage from another player\n\n**Default**: `0.25`\n\n**Range**: `0`-`1`",
+        "default": 0.25
+      },
+      "Death_DurabilityLossFactorAsResources": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1,
+        "markdownDescription": "Durability loss suffered upon death is dropped as materials. This value defines the amount of materials that are either lost or dropped:\n- `0`: All materials are lost\n- `1`: All materials are dropped\n\n**Default**: `1.0`\n\n**Range**: `0`-`1`",
+        "default": 1.0
+      },
+      "BloodDrainModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 5,
+        "markdownDescription": "Rate for how quickly players lose blood. A higher rate results in higher blood consumption\n\n**Default**: `1.0`\n\n**Range**: `0`-`5`",
+        "default": 1.0
+      },
+      "DurabilityDrainModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 5,
+        "markdownDescription": "Multiplies the amount of durability suffered from dealing or receiving damage\n\n**Default**: `1.0`\n\n**Range**: `0`-`5`",
+        "default": 1.0
+      },
+      "GarlicAreaStrengthModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 5,
+        "markdownDescription": "Affects the rate of how quickly garlic stacks when exposed\n\n**Default**: `1.0`\n\n**Range**: `0`-`5`",
+        "default": 1.0
+      },
+      "HolyAreaStrengthModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 5,
+        "markdownDescription": "Multiplies the effect of the Holy element\n\n**Default**: `1.0`\n\n**Range**: `0`-`5`",
+        "default": 1.0
+      },
+      "SilverStrengthModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 5,
+        "markdownDescription": "Affects the damage received when carrying silver items\n\n**Default**: `1.0`\n\n**Range**: `0`-`5`",
+        "default": 1.0
+      },
+      "SunDamageModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 5,
+        "markdownDescription": "Affects the duration a player may stand in the sun before starting to take damage\n\n**Default**: `1.0`\n\n**Range**: `0`-`5`",
+        "default": 1.0
+      },
+      "CastleDecayRateModifier": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 5,
+        "markdownDescription": "Rate for how quickly a castle deteriorates when the castle heart has run out of Blood Essence\n\n**Default**: `1.0`\n\n**Range**: `0`-`5`",
+        "default": 1.0
+      },
+      "CastleBloodEssenceDrainModifier": {
+        "type": "number",
+        "minimum": 0.1,
+        "maximum": 5,
+        "markdownDescription": "Rate for how quickly a castle consumes blood essence. A higher rate results in higher blood essence consumption\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+        "default": 1.0
+      },
+      "CastleMinimumDistanceInFloors": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 10,
+        "markdownDescription": "The number of minimum tiles where players can place a castle heart and/or floors next to another heart\n\n**Default**: `2`\n\n**Range**: `1`-`10`",
+        "default": 2
+      },
+      "ClanSize": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 20,
+        "markdownDescription": "The number of players that can join a single clan. Players in a clan can rise together, share progress and build castles together\n\n**Default**: `4`\n\n**Range**: `1`-`20`",
+        "default": 4
+      },
+      "VampireStatModifiers": {
+        "type": "object",
+        "properties": {
+          "MaxHealthModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplies the maximum amount of health\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "MaxEnergyModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplies the maximum amount of energy\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "PhysicalPowerModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplies physical power, this value affects the amount of damage players deal using weapon attacks and weapon skills\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "SpellPowerModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplies spell power, this value affects the amount of damage and healing players deal using spells\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "ResourcePowerModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplies the amount of damage players deal to resource objects\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "SiegePowerModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplier for siege damage (Currently unused)\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "DamageReceivedModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplies any damage being received\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "ReviveCancelDelay": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 30,
+            "markdownDescription": "Delay before revival can be cancelled (Do not change)\n\n**Default**: `5.0`",
+            "default": 5.0
+          }
+        },
+        "additionalProperties": true
+      },
+      "UnitStatModifiers_Global": {
+        "type": "object",
+        "properties": {
+          "MaxHealthModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplies the amount of health for regular units\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "PowerModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplies the damage output for regular units\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "LevelIncrease": {
+            "type": "integer",
+            "minimum": 0,
+            "markdownDescription": "Increases the level of all regular units\n\n**Default**: `0`",
+            "default": 0
+          }
+        },
+        "additionalProperties": true
+      },
+      "UnitStatModifiers_VBlood": {
+        "type": "object",
+        "properties": {
+          "MaxHealthModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplies the amount of health for V Blood bosses\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "PowerModifier": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 5,
+            "markdownDescription": "Multiplies the damage output for V Blood bosses\n\n**Default**: `1.0`\n\n**Range**: `0.1`-`5`",
+            "default": 1.0
+          },
+          "LevelIncrease": {
+            "type": "integer",
+            "minimum": 0,
+            "markdownDescription": "Increases the level of all V Blood bosses\n\n**Default**: `0`",
+            "default": 0
+          }
+        },
+        "additionalProperties": true
+      },
+      "EquipmentStatModifiers_Global": {
+        "type": "object",
+        "properties": {
+          "MaxHealthModifier": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 3,
+            "markdownDescription": "Multiplies max health from equipment\n\n**Default**: `1.0`\n\n**Range**: `0.25`-`3`",
+            "default": 1.0
+          },
+          "ResourceYieldModifier": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 3,
+            "markdownDescription": "Multiplies the materials received from harvesting resources\n\n**Default**: `1.0`\n\n**Range**: `0.25`-`3`",
+            "default": 1.0
+          },
+          "PhysicalPowerModifier": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 3,
+            "markdownDescription": "Multiplies physical attack power from equipment\n\n**Default**: `1.0`\n\n**Range**: `0.25`-`3`",
+            "default": 1.0
+          },
+          "SpellPowerModifier": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 3,
+            "markdownDescription": "Multiplies spell power from equipment\n\n**Default**: `1.0`\n\n**Range**: `0.25`-`3`",
+            "default": 1.0
+          },
+          "MovementSpeedModifier": {
+            "type": "number",
+            "minimum": 0.25,
+            "maximum": 3,
+            "markdownDescription": "Multiplies movement speed from equipment\n\n**Default**: `1.0`\n\n**Range**: `0.25`-`3`",
+            "default": 1.0
+          }
+        },
+        "additionalProperties": true
+      },
+      "GameTimeModifiers": {
+        "type": "object",
+        "properties": {
+          "DayDurationInSeconds": {
+            "type": "number",
+            "minimum": 60,
+            "maximum": 86400,
+            "markdownDescription": "The duration of an ingame day in seconds\n\n**Default**: `1080.0` (18 minutes)\n\n**Range**: `60`-`86400`",
+            "default": 1080.0
+          },
+          "DayStartHour": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 23,
+            "markdownDescription": "The starting hour of the ingame day\n\n**Default**: `9`\n\n**Range**: `0`-`23`",
+            "default": 9
+          },
+          "DayStartMinute": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 59,
+            "markdownDescription": "The starting minute of the ingame day\n\n**Default**: `0`\n\n**Range**: `0`-`59`",
+            "default": 0
+          },
+          "DayEndHour": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 23,
+            "markdownDescription": "The end hour of the ingame day\n\n**Default**: `17`\n\n**Range**: `0`-`23`",
+            "default": 17
+          },
+          "DayEndMinute": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 59,
+            "markdownDescription": "The end minute of the ingame day\n\n**Default**: `0`\n\n**Range**: `0`-`59`",
+            "default": 0
+          },
+          "BloodMoonFrequency_Min": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 255,
+            "markdownDescription": "The minimum frequency for how often a blood moon may occur (in days)\n\n**Default**: `10`\n\n**Range**: `1`-`255`",
+            "default": 10
+          },
+          "BloodMoonFrequency_Max": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 255,
+            "markdownDescription": "The maximum frequency for how often a blood moon may occur (in days)\n\n**Default**: `18`\n\n**Range**: `1`-`255`",
+            "default": 18
+          },
+          "BloodMoonBuff": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 1,
+            "markdownDescription": "The amount of additional movement speed in % that a player gains during blood moon\n\n**Default**: `0.2` (20%)\n\n**Range**: `0.1`-`1`",
+            "default": 0.2
+          }
+        },
+        "additionalProperties": true
+      },
+      "CastleStatModifiers_Global": {
+        "type": "object",
+        "properties": {
+          "TickPeriod": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 60,
+            "markdownDescription": "How often the castle decay damage should tick (in seconds)\n\n**Default**: `5.0`\n\n**Range**: `1`-`60`",
+            "default": 5.0
+          },
+          "DamageResistance": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "markdownDescription": "Base damage resistance for castle structures (Not currently used)\n\n**Default**: `0.0`",
+            "default": 0.0
+          },
+          "SafetyBoxLimit": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20,
+            "markdownDescription": "The number of vampire lockboxes players may build in a single castle\n\n**Default**: `1`\n\n**Range**: `0`-`20`",
+            "default": 1
+          },
+          "TombLimit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "markdownDescription": "The number of tombs players may build in a single castle\n\n**Default**: `12`\n\n**Range**: `1`-`50`",
+            "default": 12
+          },
+          "VerminNestLimit": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20,
+            "markdownDescription": "The number of vermin nests players may build in a single castle\n\n**Default**: `4`\n\n**Range**: `0`-`20`",
+            "default": 4
+          },
+          "PrisonCellLimit": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 50,
+            "markdownDescription": "The number of prison cells allowed in a single castle\n\n**Default**: `16`\n\n**Range**: `0`-`50`",
+            "default": 16
+          },
+          "CastleLimit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10,
+            "markdownDescription": "The number of castle hearts a single player is allowed to construct\n\n**Default**: `2`\n\n**Range**: `1`-`10`",
+            "default": 2
+          },
+          "NetherGateLimit": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "markdownDescription": "Maximum number of Nether Gates allowed per castle\n\n**Default**: `1`\n\n**Range**: `0`-`10`",
+            "default": 1
+          },
+          "ThroneOfDarknessLimit": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "markdownDescription": "Maximum number of Thrones of Darkness allowed per castle\n\n**Default**: `1`\n\n**Range**: `0`-`10`",
+            "default": 1
+          },
+          "HeartLimits": {
+            "type": "object",
+            "properties": {
+              "Level1": {
+                "type": "object",
+                "properties": {
+                  "FloorLimit": {
+                    "type": "integer",
+                    "minimum": 9,
+                    "maximum": 800,
+                    "markdownDescription": "Maximum floor tiles for Level 1 castle\n\n**Default**: `50`\n\n**Minimum**: `9`, **Maximum**: `800`",
+                    "default": 50
+                  },
+                  "ServantLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 20,
+                    "markdownDescription": "Maximum servants for Level 1 castle\n\n**Default**: `4`",
+                    "default": 4
+                  },
+                  "HeightLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "markdownDescription": "Maximum building height for Level 1 castle\n\n**Default**: `3`",
+                    "default": 3
+                  }
+                }
+              },
+              "Level2": {
+                "type": "object",
+                "properties": {
+                  "FloorLimit": {
+                    "type": "integer",
+                    "minimum": 9,
+                    "maximum": 800,
+                    "markdownDescription": "Maximum floor tiles for Level 2 castle\n\n**Default**: `140`\n\n**Minimum**: `9`, **Maximum**: `800`",
+                    "default": 140
+                  },
+                  "ServantLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 20,
+                    "markdownDescription": "Maximum servants for Level 2 castle\n\n**Default**: `5`",
+                    "default": 5
+                  },
+                  "HeightLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "markdownDescription": "Maximum building height for Level 2 castle\n\n**Default**: `3`",
+                    "default": 3
+                  }
+                }
+              },
+              "Level3": {
+                "type": "object",
+                "properties": {
+                  "FloorLimit": {
+                    "type": "integer",
+                    "minimum": 9,
+                    "maximum": 800,
+                    "markdownDescription": "Maximum floor tiles for Level 3 castle\n\n**Default**: `240`\n\n**Minimum**: `9`, **Maximum**: `800`",
+                    "default": 240
+                  },
+                  "ServantLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 20,
+                    "markdownDescription": "Maximum servants for Level 3 castle\n\n**Default**: `6`",
+                    "default": 6
+                  },
+                  "HeightLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "markdownDescription": "Maximum building height for Level 3 castle\n\n**Default**: `3`",
+                    "default": 3
+                  }
+                }
+              },
+              "Level4": {
+                "type": "object",
+                "properties": {
+                  "FloorLimit": {
+                    "type": "integer",
+                    "minimum": 9,
+                    "maximum": 800,
+                    "markdownDescription": "Maximum floor tiles for Level 4 castle\n\n**Default**: `360`\n\n**Minimum**: `9`, **Maximum**: `800`",
+                    "default": 360
+                  },
+                  "ServantLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 20,
+                    "markdownDescription": "Maximum servants for Level 4 castle\n\n**Default**: `7`",
+                    "default": 7
+                  },
+                  "HeightLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "markdownDescription": "Maximum building height for Level 4 castle\n\n**Default**: `3`",
+                    "default": 3
+                  }
+                }
+              },
+              "Level5": {
+                "type": "object",
+                "properties": {
+                  "FloorLimit": {
+                    "type": "integer",
+                    "minimum": 9,
+                    "maximum": 800,
+                    "markdownDescription": "Maximum floor tiles for Level 5 castle\n\n**Default**: `550`\n\n**Minimum**: `9`, **Maximum**: `800`",
+                    "default": 550
+                  },
+                  "ServantLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 20,
+                    "markdownDescription": "Maximum servants for Level 5 castle\n\n**Default**: `8`",
+                    "default": 8
+                  },
+                  "HeightLimit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "markdownDescription": "Maximum building height for Level 5 castle\n\n**Default**: `3`",
+                    "default": 3
+                  }
+                }
+              }
+            }
+          }
+        },
+        "additionalProperties": true
+      },
+      "PlayerInteractionSettings": {
+        "type": "object",
+        "properties": {
+          "TimeZone": {
+            "type": "string",
+            "enum": [
+              "Local",
+              "UTC",
+              "PST",
+              "EST",
+              "CET",
+              "CST"
+            ],
+            "markdownDescription": "Time zone for PvP and siege windows:\n- `Local`: Local System Time\n- `UTC`: UTC\n- `PST`: Pacific Standard Time (UTC -8)\n- `EST`: Eastern Standard Time (UTC -5)\n- `CET`: Central European Time (UTC +1)\n- `CST`: China Standard Time (UTC +8)\n\n**Default**: `UTC`",
+            "default": "UTC"
+          },
+          "VSPlayerWeekdayTime": {
+            "type": "object",
+            "properties": {
+              "StartHour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "markdownDescription": "The real time starting hour for PvP during weekdays\n\n**Default**: `17`",
+                "default": 17
+              },
+              "StartMinute": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "markdownDescription": "The real time starting minute for PvP during weekdays\n\n**Default**: `0`",
+                "default": 0
+              },
+              "EndHour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "markdownDescription": "The real time ending hour for PvP during weekdays\n\n**Default**: `23`",
+                "default": 23
+              },
+              "EndMinute": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "markdownDescription": "The real time ending minute for PvP during weekdays\n\n**Default**: `0`",
+                "default": 0
+              }
+            }
+          },
+          "VSPlayerWeekendTime": {
+            "type": "object",
+            "properties": {
+              "StartHour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "markdownDescription": "The real time starting hour for PvP during weekends\n\n**Default**: `17`",
+                "default": 17
+              },
+              "StartMinute": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "markdownDescription": "The real time starting minute for PvP during weekends\n\n**Default**: `0`",
+                "default": 0
+              },
+              "EndHour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "markdownDescription": "The real time ending hour for PvP during weekends\n\n**Default**: `23`",
+                "default": 23
+              },
+              "EndMinute": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "markdownDescription": "The real time ending minute for PvP during weekends\n\n**Default**: `0`",
+                "default": 0
+              }
+            }
+          },
+          "VSCastleWeekdayTime": {
+            "type": "object",
+            "properties": {
+              "StartHour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "markdownDescription": "The real time starting hour for castle sieges during weekdays\n\n**Default**: `17`",
+                "default": 17
+              },
+              "StartMinute": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "markdownDescription": "The real time starting minute for castle sieges during weekdays\n\n**Default**: `0`",
+                "default": 0
+              },
+              "EndHour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "markdownDescription": "The real time ending hour for castle sieges during weekdays\n\n**Default**: `23`",
+                "default": 23
+              },
+              "EndMinute": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "markdownDescription": "The real time ending minute for castle sieges during weekdays\n\n**Default**: `0`",
+                "default": 0
+              }
+            }
+          },
+          "VSCastleWeekendTime": {
+            "type": "object",
+            "properties": {
+              "StartHour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "markdownDescription": "The real time starting hour for castle sieges during weekends\n\n**Default**: `17`",
+                "default": 17
+              },
+              "StartMinute": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "markdownDescription": "The real time starting minute for castle sieges during weekends\n\n**Default**: `0`",
+                "default": 0
+              },
+              "EndHour": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 23,
+                "markdownDescription": "The real time ending hour for castle sieges during weekends\n\n**Default**: `23`",
+                "default": 23
+              },
+              "EndMinute": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59,
+                "markdownDescription": "The real time ending minute for castle sieges during weekends\n\n**Default**: `0`",
+                "default": 0
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }]
+}
